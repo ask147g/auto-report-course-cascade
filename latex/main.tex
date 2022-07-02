@@ -1,0 +1,201 @@
+\documentclass[14pt,a4paper,oneside]{article}
+
+\usepackage[utf8x]{inputenc}
+\usepackage[warn]{mathtext}
+\usepackage{amsmath}
+\usepackage[russian]{babel}
+\usepackage{fontspec} 
+\setmainfont{Times New Roman}
+\usepackage[14pt]{extsizes}
+\usepackage{tabularx}
+\usepackage{microtype}
+\usepackage{verbatim}
+\usepackage{longtable}
+\usepackage{ccaption}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{array}
+\usepackage{longtable}
+
+\usepackage{graphicx}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+
+\usepackage[top=2cm,bottom=2cm,left=3cm,right=1cm]{geometry}
+\newcolumntype{C}[1]{>{\hsize=#1\hsize\centering\arraybackslash}X}%
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+
+\usepackage{ragged2e}
+\justifying
+\sloppy
+\tolerance=500
+\hyphenpenalty=10000
+\emergencystretch=3em
+
+\newlength{\fivecharsapprox}
+\setlength{\fivecharsapprox}{1.5cm}
+
+\usepackage{indentfirst}
+\setlength{\parindent}{1.5cm} % для шрифта 14pt
+
+%\renewcommand{\rmdefault}{ftm}
+
+\usepackage{fancyhdr} % пакет для установки колонтитулов
+\pagestyle{fancy} % смена стиля оформления страниц
+\fancyhf{} % очистка текущих значений
+%\rfoot{\normalsize \thepage} % установка верхнего колонтитула
+\fancyfoot[R]{\normalsize \thepage}
+\renewcommand{\footrulewidth}{0pt} % убрать разделительную линию внизу страницы
+\renewcommand{\headrulewidth}{0pt} % убрать разделительную линию вверху страницы
+
+% SECTION
+\makeatletter
+\renewcommand\section{%
+  \@startsection {section}{1}%
+    {\fivecharsapprox}%
+    {-1em \@plus -1ex \@minus -.2ex}%
+    {1em \@plus .2ex}%
+    {\raggedright\centering\hyphenpenalty=10000\normalfont\normalsize\bfseries\MakeUppercase}}
+\makeatother
+
+% SUBSECTION
+\makeatletter
+\renewcommand\subsection{%
+  \@startsection{subsection}{2}%
+    {\fivecharsapprox}%
+    {-1em \@plus -1ex \@minus -.2ex}%
+    {1em \@plus .2ex}%
+    {\raggedright\hyphenpenalty=10000\normalfont\normalsize\bfseries}}
+\makeatother
+
+% REFERENCES
+\makeatletter
+\renewcommand\@biblabel[1]{#1.}
+\makeatother
+
+% FIGURES AND TABLES
+\usepackage[tableposition=top]{caption}
+\usepackage{subcaption}
+\DeclareCaptionLabelFormat{gostfigure}{Рисунок #2}
+\DeclareCaptionLabelFormat{gosttable}{Таблица #2}
+\DeclareCaptionLabelSeparator{gost}{~---~}
+\captionsetup{labelsep=gost}
+\captionsetup[figure]{labelformat=gostfigure}
+\captionsetup[table]{justification=justified, labelformat=gosttable}
+\renewcommand{\thesubfigure}{\asbuk{subfigure}}
+
+%\DeclareCaptionLabelSeparator{fill}{\hfill}
+%\DeclareCaptionLabelFormat{fullparents}{\bothIfFirst{#1}{~}#2}
+%\DeclareCaptionLabelFormat{fullparents}{Таблица #2}
+%\captionsetup[table]{
+%     labelformat=gosttable,
+%     labelsep = gost,
+%     labelsep=fill,
+%     labelfont=it,
+%     textfont=bf,
+%     singlelinecheck=false
+%     }
+     
+\usepackage{setspace} 
+\setstretch{1.3}
+\onehalfspacing
+
+\renewcommand{\thesection}{\arabic{section}.}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}.}
+\renewcommand{\thesubsubsection}{\arabic{section}.\arabic{subsection}.\arabic{subsubsection}.}
+\renewcommand{\theequation}{\arabic{equation}}
+
+\setcounter{totalnumber}{10}
+\setcounter{topnumber}{10}
+\renewcommand{\topfraction}{1}
+\renewcommand{\textfraction}{0}
+
+\usepackage{color} %% это для отображения цвета в коде
+\usepackage{listings} %% собственно, это и есть пакет listings
+
+\lstset{language=C++,
+				frame=tlrb,xleftmargin=\fboxsep,xrightmargin=-\fboxsep, % Рамка, подогнанная к заголовку
+				rulecolor=\color{black},
+				breaklines=true,
+                basicstyle=\ttfamily\footnotesize,,
+                keywordstyle=\color{blue}\ttfamily,
+                stringstyle=\color{red}\ttfamily,
+                commentstyle=\color{green}\ttfamily,
+                morecomment=[l][\color{magenta}]{\#}
+}
+
+\usepackage{datatool, filecontents}
+
+\DTLsetseparator{;}
+
+\DTLloaddb{variables}{variables.csv}
+
+\newcommand{\var}[1]{% 
+     \DTLgetvalueforkey{\getvalue}{value}{variables}{avar}{#1}
+     \getvalue
+}%
+
+
+\begin{document}
+
+\input{latex/title/title.tex}
+
+\tableofcontents
+\newpage
+
+\noindent\textbf{ЦЕЛЬ РАБОТЫ:} провести расчет изменения концентрации $^{7}$Li по колоннам каскада в 
+режимах без отбора и с отбором при заданных параметрах его работы.
+
+\input{latex/theory/theory.tex}
+
+\input{latex/theory/methodology.tex}
+
+\input{latex/practice/practice.tex}
+
+\section*{Выводы}
+\begin{enumerate}
+\item Проведен расчет изменения концентрации $^{7}$Li по колоннам каскада 
+в режимах без отбора и с отбором при заданных параметрах его работы для 
+амальгамно-обменного способа. Построены график изменения концентрации 
+$^{7}$Li в обоих режимах работы каскада и принципиальная схема полученного 
+каскада.
+
+\item Рассчитано, что для обеспечения целевой концентрации на выходе из 
+каскада колонн в безотборном режиме необходимо минимально три колонны.
+
+\item Показано, что в режиме без отбора концентрация по $^{7}$Li на выходе 
+из каскада колонн, состоящей из 6 обменных колонн, 0,99984. 
+
+\item Определено, что необходимо увеличить минимальный начальный поток 
+в 1,576 раз для сшивки каскада по концентрации отвала. 
+
+\item Установлено, что скорость изменения концентрации по колоннам каскада 
+для режима без отбора больше, чем для режима с отбором.
+
+\item Определены потоки питания F = 9,30749 моль/ч и 
+отвала W = 6,85956 моль/ч.
+\end{enumerate}
+
+
+\newpage
+\addcontentsline{toc}{section}{Список использованных источников}
+\begin{thebibliography}{2}
+\bibitem{mukhin}
+Мухин К.Н. Экспериментальная ядерная физика. В двух томах. Т. 1. Физика атомного ядра. Учебник для вузов. Изд. 3-е М., Атомиздат, 1974 г., 584 с.
+\bibitem{rocus}
+РД-07-15-2002. Федеральный надзор России по ядерной и радиационной безопасности [Текст]. -- Введ. 2003-05-10. -- М.:Гостатомнадзор России.
+\bibitem{kondratiy}
+Кондратьев В.Н. Кинетика химических газовых реакций, М.: АН СССР, 1958. — 693 с.
+\bibitem{gik}
+Источники Гамма - излучения: [Электронный ресурс] // Изотоп Ростатом. URL:  \url{http://www.isotop.ru/files/treecontent/nodes/attaches/0/95/noname..pdf}. (Дата обращения 15.04.2022).
+\bibitem{steel12}
+Сталь марки 12Х18Н10Т: [Электронный ресурс] // Центральный металлический портал. URL: \url{https://metallicheckiy-portal.ru/marki_metallov/stk/12X18H10T} (Дата обращения 15.04.2022).
+\bibitem{steel02}
+Сталь марки AISI316: [Электронный ресурс] // Центральный металлический портал. URL: \url{https://metallicheckiy-portal.ru/marki_metallov/stn/AISI316} (Дата обращения 15.04.2022).
+\bibitem{geant4}
+Geant4 A simulation toolkit: [Электронный ресурс]. URL:  \url{https://geant4.web.cern.ch/}. (Дата обращения 15.02.2022).
+\bibitem{PrataC++}
+Стивен Прата. Язык программирования C++ (C++11). Лекции и упражнения, 6-е издание — М.: Вильямс, 2012. — 1248 с.
+\end{thebibliography}
+
+
+\end{document}

@@ -1,0 +1,41 @@
+\section{Практическая часть}
+\subsection{Исходные данные для расчета}
+Концентрация отбора $c_{P} =$ \var{concentraion_product};
+
+Концентрация питания $c_{F} =$ \var{concentraion_feed};
+
+Концентрация отвала $c_{W} =$ \var{concentraion_waste};
+
+Температура $T =$ \var{temperature} $^{o}C$;
+
+Поток отбора $P =$ \var{product_flow} $\dfrac{\text{кг}}{\text{год}}$;
+
+Доля сокращения потока на одной ТТ $r =$ \var{flow_reduction_share} \%;
+
+Количество ТТ в одной колонне $N =$ \var{number_theoretical_plates}.
+\subsection{Расчет изменения изотопной концентрации по каскаду в 
+стационарном режиме}
+Поток отбора переведен из кг/год в моль/ч:
+
+$P = \var{product_flow} \dfrac{\text{кг}}{\text{год}} = \dfrac{\var{product_flow} \dfrac{\text{кг}}{\text{год}}}{M} 
+= \dfrac{\var{product_flow}\cdot\dfrac{1}{365\cdot 24} \dfrac{\text{кг}}{\text{ч}}}
+{(7c_{P}+6(1-c_{P}))\cdot 10^{-3} \dfrac{\text{кг}}{\text{моль}}} \approx 
+\var{product_flow_mol} \dfrac{\text{моль}}{\text{ч}}$
+
+Рассчитано значение коэффициента разделения по формуле (\ref{koeff_separation}):
+\begin{equation}\label{koeff_separation} 
+    \alpha = 1 + \dfrac{4755}{T^{2}} - \dfrac{0,803}{T}
+\end{equation}
+
+$\alpha = 1 + \dfrac{4755}{(273+\var{temperature})^{2}} - \dfrac{0,803}{273+\var{temperature}} \approx \var{coefficient_separation}$
+
+Рассчитано значение коэффициента обогащения по формуле (\ref{koeff_enrichment}):
+\begin{equation}\label{koeff_enrichment}
+    \varepsilon  = \alpha - 1
+\end{equation}
+
+$\varepsilon  = \var{coefficient_separation} - 1 = \var{coefficient_enrichment}$
+
+По формуле (18) определено число теоретических тарелок:
+
+\newpage
