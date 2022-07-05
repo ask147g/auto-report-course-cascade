@@ -18,6 +18,7 @@ def setInputData():
     number_theoretical_plates = 20
     sendInputDataLatex()
 
+
 # send initial data to latex
 def sendInputDataLatex():
     global concentraion_product, concentraion_feed, concentraion_waste, temperature

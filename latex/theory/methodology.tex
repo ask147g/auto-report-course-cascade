@@ -1,2 +1,80 @@
 \section{Методика проведения расчетов}
+Расчет параметров работы каскада колонн в режимах без отбора и с отбором 
+проводится в следующей последовательности.
+
+1. Рассчитывается значение коэффициента разделения для заданной 
+температуры по формуле (\ref{eq:koeff_separation}):
+\begin{equation}\label{eq:koeff_separation}
+\alpha = 1 + \dfrac{4755}{T^{2}} - \dfrac{0,803}{T},
+\end{equation}
+\noindent где $T$ - температура, К.
+
+2. По формуле (\ref{eq:koeff_enrichment}) рассчитывается коэффициент обогащения:
+\begin{equation}\label{eq:koeff_enrichment}
+\varepsilon = \alpha - 1
+\end{equation}
+
+3. Определяется минимальное число теоретических тарелок в обогатительной 
+и регенеративной частях:
+\begin{equation}
+n_{\text{обог}} = \dfrac{1}{\varepsilon}\ln\dfrac{c_{P}(1-c_{F})}{c_{F}(1-c_{P})},
+\end{equation}
+\begin{equation}
+    n_{\text{рег}} = \dfrac{1}{\varepsilon}\ln\dfrac{c_{F}(1-c_{W})}{c_{W}(1-c_{F})},
+    \end{equation}
+\noindent где $c_{P}, c_{W}, c_{F}$ - концентрации отбора, отвала и питания.
+
+4. По формуле (\ref{eq:number_theoretical_plates}) вычисляется число 
+теоретических тарелок:
+\begin{equation}\label{eq:number_theoretical_plates}
+n = 2(n_{\text{обог}} + n_{\text{рег}})
+\end{equation}
+
+5. Определяется количество колонн:
+\begin{equation}
+n_{\text{кол}}^{all} = \dfrac{n}{N},
+\end{equation}
+\noindent где $N$ - количество теоретических тарелок в одной колонне.
+
+6. Рассчитывается изменение концентрации целевого изотопа в безотбоном 
+режиме ($P$ = 0) по колоннам каскада с помощью формулы (\ref{eq:concentration_change}):
+\begin{equation}\label{eq:concentration_change}
+c_{1}(n_{\text{кол}}) = \dfrac{\dfrac{c_{W}}{1-c_{W}}e^{\varepsilon Nn_{\text{кол}}}}{1 + \dfrac{c_{W}}{1-c_{W}}e^{\varepsilon Nn_{\text{кол}}}}
+\end{equation}
+
+7. Определяется величина начального потока при работе каскада с 
+заданным отбором по формуле (\ref{eq:initial_flow}):
+\begin{equation}\label{eq:initial_flow}
+L_{\text{нач}} = kP\dfrac{c_{P} - c_{F}}{\varepsilon c_{F}(1 - c_{F})},
+\end{equation}
+\noindent где $P$ - поток отбора, моль/ч; $k$ - коэффициент для сшивки каскада по концентрации отвала. 
+В первом приближении $k = 2$, далее в зависимости от полученной концентрации отвала вычисляется по формуле
+$k = 2 \pm 0,0001i$ ($i$ - цикл итерации).
+
+8. Рассчитывается средний поток для каждой колонны по формуле (\ref{eq:mean_flow}):
+\begin{equation}\label{eq:mean_flow}
+L(n_{\text{кол}}) = \dfrac{1}{2}L_{\text{нач}}(1 - r)^{Nn_{\text{кол}}}\cdot (1 + (1 - r)^{-N}),
+\end{equation}
+\noindent где $r$ - доля сокращения потока на одной теоретической тарелке.
+
+9. Рассчитывается изменение концентрации целевого изотопа в режиме 
+с отбором по колоннам каскада по формуле (\ref{eq:concentration_c2}):
+\begin{equation}\label{eq:concentration_c2}
+    c_{2}(n_{\text{кол}}) = \dfrac{x_{1} + \dfrac{x_{1} - c_{P}}{c_{P} - x_{2}} e^{Nn_{\text{кол}}\varepsilon (x_{1} - x_{2})}x_{2}}{1 + \dfrac{x_{1} - c_{P}}{c_{P} - x_{2}} e^{Nn_{\text{кол}}\varepsilon (x_{1} - x_{2})}}
+\end{equation}
+
+\noindent где $x_{1,2} = \dfrac{1}{2}(1 + \dfrac{P}{L\varepsilon})\pm \sqrt{\dfrac{1}{4}(1 + \dfrac{P}{L\varepsilon})^{2} - \dfrac{P}{L\varepsilon}c_{P}}.$
+
+10. Определяются величины потоков питания $F$ и отвала $W$ в каскаде для 
+режима с отбором из системы уравнений (\ref{eq:system_material}):
+\begin{equation}\label{eq:system_material}
+\begin{cases}
+Fc_{F} = Pc_{P} + Wc_{W}\\
+F = P + W
+\end{cases}
+\end{equation}
+
+11. Строятся графики изменения концентрации целевого изотопа в режимах 
+без отбора и с отбором по колоннам каскада.
+
 \newpage
